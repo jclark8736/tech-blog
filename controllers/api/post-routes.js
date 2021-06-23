@@ -2,6 +2,8 @@ const router = require('express').Router();
 const { Post } = require('../../models/');
 const withAuth = require('../../utils/auth');
 
+//api/post/
+
 router.post('/', withAuth, async (req, res) => {
   const body = req.body;
 
@@ -10,9 +12,15 @@ router.post('/', withAuth, async (req, res) => {
       // TODO: POST BODY SENT IN REQUEST. HINT USING SPREAD
 
       // TODO: SET USERID TO LOGGEDIN USERID
+      title: req.body.title,
+      body: req.body.body,
+      userId: req.session.id
+
 
     });
+
     res.json(newPost);
+    
   } catch (err) {
     res.status(500).json(err);
   }
@@ -22,6 +30,7 @@ router.put('/:id', withAuth, async (req, res) => {
   try {
     const [affectedRows] = await Post.update(req.body, {
       // TODO: SET ID TO ID PARAMETER INSIDE WHERE CLAUSE CONDITION FIELD
+
       
     });
 
