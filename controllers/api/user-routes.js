@@ -7,11 +7,17 @@ router.post('/', async (req, res) => {
     const newUser = await User.create({
       username: req.body.username,
       password: req.body.password
+      
       // TODO: SET USERNAME TO USERNAME SENT IN REQUEST
 
       // TOD: SET PASSWORD TO PASSWORD SENT IN REQUEST
 
     });
+    res.json
+    console.log(newUser)
+    console.log(newUser.username)
+    console.log(newUser.password)
+   
 
     req.session.save(() => {
       // TODO: SET USERID IN REQUEST SESSION TO ID RETURNED FROM DATABASE
@@ -19,8 +25,8 @@ router.post('/', async (req, res) => {
       // TODO: SET USERNAME IN REQUEST SESSION TO USERNAME RETURNED FROM DATABASE
 
       // TODO: SET LOGGEDIN TO TRUE IN REQUEST SESSION
-      req.session.userId= 
-      req.session.username= 
+      req.session.userId= newUser.id
+      req.session.username= newUser.username
       req.session.loggedIn = true;
 
 
@@ -60,8 +66,8 @@ router.post('/login', async (req, res) => {
 
       // TODO: SET LOGGEDIN TO TRUE IN REQUEST SESSION
 
-      req.session.userId= 
-      req.session.username= 
+      req.session.userId= user.id;
+      req.session.username= user.username;
       req.session.loggedIn = true;
 
 
