@@ -2,12 +2,13 @@ const router = require('express').Router();
 const { Post } = require('../models/');
 const withAuth = require('../utils/auth');
 
+// api/dashboard
 router.get('/', withAuth, async (req, res) => {
   try {
     const postData = await Post.findAll({
       where: {
         // TODO: SET USERID TO THE LOGGED-IN USER ID
-        user_id: req.session.user_id
+        userId: req.session.user_id
 
       },
       attributes: [
@@ -16,7 +17,8 @@ router.get('/', withAuth, async (req, res) => {
         "body",
       ]
     });
-
+    console.log(req.session.user_id)
+    console.log(userId)
     const posts = postData.map((post) => post.get({ plain: true }));
 
     res.render('all-posts-admin', {
