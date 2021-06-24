@@ -6,6 +6,7 @@ router.post('/', async (req, res) => {
   try {
     const newUser = await User.create({
       username: req.body.username,
+      
       password: req.body.password
       
       // TODO: SET USERNAME TO USERNAME SENT IN REQUEST
@@ -70,15 +71,18 @@ router.post('/login', async (req, res) => {
 
       // TODO: SET LOGGEDIN TO TRUE IN REQUEST SESSION
 
-      req.session.user_id= user.user_id;
+      req.session.userId= user.id;
       req.session.username= user.username;
       req.session.loggedIn = true;
 
 
-
-      console.log(req.session.user_id)
+      console.log(req.session)
+      console.log(req.session.userId + "USERID")
       console.log(req.session.username)
       console.log(req.session.loggedIn)
+      console.log(user.id)
+      console.log(user.username + "DB")
+      console.log(user.id)
       res.json({ user, message: 'You are now logged in!' });
       console.log("succesfully logged in")
     });
