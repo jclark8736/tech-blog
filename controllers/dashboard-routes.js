@@ -4,11 +4,13 @@ const withAuth = require('../utils/auth');
 
 // api/dashboard
 router.get('/', withAuth, async (req, res) => {
+  console.log("GET /")
   try {
     const postData = await Post.findAll({
       where: {
         // TODO: SET USERID TO THE LOGGED-IN USER ID
-        userId: req.session.user_id
+        userId: req.session.userId
+
 
       },
       attributes: [
@@ -17,7 +19,7 @@ router.get('/', withAuth, async (req, res) => {
         "body",
       ]
     });
-    console.log(req.session.user_id)
+    console.log(req.session.userid)
     console.log(userId)
     const posts = postData.map((post) => post.get({ plain: true }));
 

@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
       // TOD: SET PASSWORD TO PASSWORD SENT IN REQUEST
 
     });
-    res.json
+    
     console.log(newUser)
     console.log(newUser.username)
     console.log(newUser.password)
@@ -26,8 +26,8 @@ router.post('/', async (req, res) => {
       // TODO: SET USERNAME IN REQUEST SESSION TO USERNAME RETURNED FROM DATABASE
 
       // TODO: SET LOGGEDIN TO TRUE IN REQUEST SESSION
-      req.session.user_id = newUser.id
-      console.log(req.session.user_id)
+      req.session.userId = newUser.id
+      console.log(req.session.userId)
       console.log(newUser.id)
       req.session.username = newUser.username
       console.log(req.session.username)

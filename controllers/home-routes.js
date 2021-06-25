@@ -19,9 +19,13 @@ router.get('/', async (req, res) => {
 // get single post
 router.get('/post/:id', async (req, res) => {
   try {
-    const postData = await Post.findByPk(
+    const postData = await Post.findByPk(req.params.id, {
       // TODO: YOUR CODE HERE
-    );
+      
+      include: [Comment]
+
+      
+    });
 
     if (postData) {
       const post = postData.get({ plain: true });
@@ -51,6 +55,26 @@ router.get('/signup', (req, res) => {
   }
 
   res.render('signup');
+});
+
+
+router.get('/dashboard', (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+
+  res.render('dashboard');
+});
+
+
+router.get('/dashboard/new', (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+
+  res.render('new-post');
 });
 
 module.exports = router;

@@ -4,8 +4,13 @@ const withAuth = require('../../utils/auth');
 
 //api/post/
 
-router.post('/', withAuth, async (req, res) => {
+//see what's wrong with withAuth from Prof. Han.
+
+router.post('/', async (req, res) => {
   const body = req.body;
+  console.log("TEST ROUTE POST")
+  console.log(req.body)
+  console.log(req.session.userId)
 
   try {
     const newPost = await Post.create({
@@ -14,11 +19,11 @@ router.post('/', withAuth, async (req, res) => {
       // TODO: SET USERID TO LOGGEDIN USERID
       title: req.body.title,
       body: req.body.body,
-      userId: req.session.user_id
+      userId: req.session.userId
 
 
     });
-
+    console.log(newPost)
     res.json(newPost);
     
   } catch (err) {
@@ -30,9 +35,12 @@ router.put('/:id', withAuth, async (req, res) => {
   try {
     const [affectedRows] = await Post.update(req.body, {
       // TODO: SET ID TO ID PARAMETER INSIDE WHERE CLAUSE CONDITION FIELD
-
+      where: {
+        id: req.params.id
+      }
       
     });
+    console.log(affectedRows)
 
     if (affectedRows > 0) {
       res.status(200).end();
@@ -48,7 +56,9 @@ router.delete('/:id', withAuth, async (req, res) => {
   try {
     const [affectedRows] = Post.destroy({
       // TODO: SET ID TO ID PARAMETER INSIDE WHERE CLAUSE CONDITION FIELD
-
+      where: {
+        id: req.params.id
+      }
     });
 
     if (affectedRows > 0) {
