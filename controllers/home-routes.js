@@ -58,13 +58,26 @@ router.get('/signup', (req, res) => {
 });
 
 
-router.get('/dashboard', (req, res) => {
+router.get('/dashboard/edit/:id', async (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('/');
     return;
   }
+  const postData = await Post.findByPk(req.params.id)
+  console.log(postData)
+  const post = postData.get({plain:true})
+  res.render('edit-post', post)
+})
 
-  res.render('dashboard');
+router.get('/dashboard', async (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+  const postData = await Post.findAll({include: [User]}) 
+
+  const posts = postData.map((post) => post.get({ plain: true }));
+  res.render('dashboard', {posts});
 });
 
 
