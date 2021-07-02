@@ -4,7 +4,6 @@ const withAuth = require('../../utils/auth');
 
 //api/post/
 
-//see what's wrong with withAuth from Prof. Han.
 
 router.post('/', async (req, res) => {
   const body = req.body;
@@ -54,7 +53,7 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   console.log("ROUTE HIT DELETE")
-  console.log(req.params.id)
+  // console.log(req.params.id)
   try {
     const [affectedRows] = Post.destroy({
       // TODO: SET ID TO ID PARAMETER INSIDE WHERE CLAUSE CONDITION FIELD

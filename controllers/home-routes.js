@@ -66,6 +66,7 @@ router.get('/dashboard/edit/:id', async (req, res) => {
   const postData = await Post.findByPk(req.params.id)
   console.log(postData)
   const post = postData.get({plain:true})
+  console.log(post + "POST CONSOLE")
   res.render('edit-post', post)
 })
 
