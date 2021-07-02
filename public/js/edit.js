@@ -4,7 +4,7 @@ console.log(postId)
 
 const editFormHandler = async function(event) {
   event.preventDefault();
-  console.log(e.target["data-id"])
+  console.log(event.target["data-id"])
 
   const title = document.querySelector('input[name="post-title"]').value;
   const body = document.querySelector('textarea[name="post-body"]').value;
